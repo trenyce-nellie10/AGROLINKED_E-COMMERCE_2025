@@ -1,6 +1,6 @@
-<?php require_once 'core.php'; ?>
-<!doctype html><html><head><meta charset="utf-8"><title>Cart - AgroLinked</title><link rel="stylesheet" href="css/style.css"></head>
-<body class="page bg-image"><?php include 'nav.php'; ?>
+<?php require_once '..core.php'; ?>
+<!doctype html><html><head><meta charset="utf-8"><title>Cart - AgroLinked</title><link rel="stylesheet" href="../css/style.css"></head>
+<body class="page bg-image"><?php include '../nav.php'; ?>
 <main class="center-wrap">
   <div class="card" style="max-width:900px;">
     <h2>Your Cart</h2>

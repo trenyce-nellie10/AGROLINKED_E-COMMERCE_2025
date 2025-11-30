@@ -1,8 +1,8 @@
-<?php require_once 'core.php'; if (is_logged_in()) header("Location: index.php"); ?>
+<?php require_once '../core.php'; if (is_logged_in()) header("Location: ../index.php"); ?>
 <!doctype html>
-<html><head><meta charset="utf-8"><title>Register - AgroLinked</title><link rel="stylesheet" href="css/style.css"><script defer src="js/register.js"></script></head>
+<html><head><meta charset="utf-8"><title>Register - AgroLinked</title><link rel="stylesheet" href="../css/style.css"><script defer src="../js/register.js"></script></head>
 <body class="page page-auth bg-image">
-  <div class="nav"><div class="brand">AgroLinked</div><div class="nav-actions"><a href="index.php" class="btn btn-link">Home</a><a href="login.php" class="btn btn-primary">Login</a></div></div>
+  <div class="nav"><div class="brand">AgroLinked</div><div class="nav-actions"><a href="../index.php" class="btn btn-link">Home</a><a href="login.php" class="btn btn-primary">Login</a></div></div>
   <main class="center-wrap">
     <form id="registerForm" class="card">
       <h2 class="card-title">Create account</h2>

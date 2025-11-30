@@ -1,8 +1,9 @@
 <?php require_once 'core.php'; ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8"><title>AgroLinked</title>
+  <meta charset="utf-8">
+  <title>AgroLinked</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page bg-image">

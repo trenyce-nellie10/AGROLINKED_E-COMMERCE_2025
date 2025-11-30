@@ -1,4 +1,4 @@
-<?php require_once '..core.php'; ?>
+<?php require_once '../core.php'; ?>
 <!doctype html>
 <html><head><meta charset="utf-8"><title>Products - AgroLinked</title><link rel="stylesheet" href="../css/style.css"><script>
 async function load(){
@@ -11,7 +11,7 @@ async function load(){
       <h3>${p.title}</h3>
       <p class="muted">${p.vendor_name} • ${p.cat_name}</p>
       <p class="price">₵ ${parseFloat(p.unit_price).toFixed(2)} / ${p.quantity || ''}</p>
-      <a class="btn btn-primary" href="../view/single_product.php?id=${p.product_id}">View</a>
+      <a class="btn btn-primary" href="single_product.php?id=${p.product_id}">View</a>
     </div>
   `).join('');
 }

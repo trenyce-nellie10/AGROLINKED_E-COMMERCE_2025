@@ -16,8 +16,6 @@
     <?php else: ?>
       <a class="btn btn-secondary" href="../login/register.php">Register</a>
       <a class="btn btn-primary" href="../login/login.php">Login</a>
-      <a href="../login/logout.php" class="btn-logout">Logout</a>
-
     <?php endif; ?>
   </div>
 </div>

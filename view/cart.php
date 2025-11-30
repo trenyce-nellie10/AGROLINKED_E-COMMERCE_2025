@@ -1,4 +1,4 @@
-<?php require_once '..core.php'; ?>
+<?php require_once '../core.php'; ?>
 <!doctype html><html><head><meta charset="utf-8"><title>Cart - AgroLinked</title><link rel="stylesheet" href="../css/style.css"></head>
 <body class="page bg-image"><?php include '../nav.php'; ?>
 <main class="center-wrap">
@@ -6,7 +6,7 @@
     <h2>Your Cart</h2>
     <div id="cartList"></div>
     <div id="total" style="margin-top:12px;font-weight:700"></div>
-    <a class="btn btn-primary" href="checkout.php">Checkout</a>
+    <a class="btn btn-primary" href="../login/checkout.php">Checkout</a>
   </div>
 </main>
 <script>

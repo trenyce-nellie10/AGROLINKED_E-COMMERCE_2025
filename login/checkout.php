@@ -1,6 +1,6 @@
-<?php require_once '..core.php'; require_login(); ?>
+<?php require_once '../core.php'; require_login(); ?>
 <!doctype html><html><head><meta charset="utf-8"><title>Checkout - AgroLinked</title><link rel="stylesheet" href="../css/style.css"></head>
-<body class="page bg-image"><?php include 'nav.php'; ?>
+<body class="page bg-image"><?php include '../nav.php'; ?>
 <main class="center-wrap">
   <div class="card" style="max-width:700px;">
     <h2>Checkout</h2>
@@ -25,7 +25,7 @@ document.getElementById('checkoutForm').addEventListener('submit', async (e)=>{
   const fd = new FormData(e.target);
   fd.append('cart', JSON.stringify(cart));
   fd.append('action','checkout');
-  const res = await fetch('actions/order_action.php',{method:'POST',body:fd});
+  const res = await fetch('../actions/order_action.php',{method:'POST',body:fd});
   const j = await res.json();
   document.getElementById('msg').textContent = j.message || 'Error';
   if (j.status === 'success'){ localStorage.removeItem('agro_cart'); setTimeout(()=>location.href='../index.php',900); }

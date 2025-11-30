@@ -1,7 +1,7 @@
-<?php require_once '../core.php'; $id=(int)($_GET['id']??0); if(!$id) header('Location: all_products.php'); require_once 'classes/Product.php'; $p=(new Product())->get($id); if (!$p) { echo "Not found"; exit; }
+<?php require_once '../core.php'; $id=(int)($_GET['id']??0); if(!$id) header('Location: all_products.php'); require_once '../classes/Product.php'; $p=(new Product())->get($id); if (!$p) { echo "Not found"; exit; }
 ?>
 <!doctype html><html><head><meta charset="utf-8"><title><?php echo htmlspecialchars($p['title']); ?></title><link rel="stylesheet" href="../css/style.css"></head>
-<body class="page bg-image"><?php include 'nav.php'; ?>
+<body class="page bg-image"><?php include '../nav.php'; ?>
 <main class="center-wrap">
   <div class="card" style="max-width:900px;">
     <div style="display:flex;gap:20px;">

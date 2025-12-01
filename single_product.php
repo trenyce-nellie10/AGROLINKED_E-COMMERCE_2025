@@ -1,57 +1,93 @@
-<?php 
-require_once '../core.php'; 
-$id=(int)($_GET['id']??0); 
-if(!$id) header('Location: all_products.php'); 
-require_once '../classes/Product.php'; 
-$p=(new Product())->get($id); 
-if (!$p) { echo "Not found"; exit; }
+<?php
+// single_product.php
+require_once "core.php";
+require_once "controllers/product_controller.php";
+require_once "controllers/vendor_controller.php";
+
+$id = $_GET['id'] ?? 0;
+$product = get_product_ctr($id);
+
+if (!$product) {
+    echo "Product not found.";
+    exit();
+}
+
+// Get vendor info
+$vendor = get_vendor_profile_ctr($product['vendor_id']);
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title><?php echo htmlspecialchars($p['title']); ?></title>
-  <link rel="stylesheet" href="../css/style.css">
+  <title><?php echo htmlspecialchars($product['product_name']); ?> - AgroLinked</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .product-container { display:flex; gap:20px; flex-wrap:wrap; }
+    .p-img { width:360px; height:300px; object-fit:cover; border-radius:12px; }
+    .qty-box { width:70px; padding:6px; }
+  </style>
 </head>
-<body class="page bg-image">
-  <?php include '../nav.php'; ?>
-  <main class="center-wrap">
-    <div class="card" style="max-width:900px;">
-      <div style="display:flex;gap:20px;">
-        <div style="flex:1;">
-          <img src="<?php echo $p['image_path'] ? '../' . htmlspecialchars($p['image_path']) : '../assets/images/default.png'; ?>" style="width:100%;height:420px;object-fit:cover;border-radius:12px;">
-        </div>
-        <div style="flex:1;">
-          <h1><?php echo htmlspecialchars($p['title']); ?></h1>
-          <p><strong>Vendor:</strong> <?php echo htmlspecialchars($p['vendor_name']); ?></p>
-          <p><strong>Category:</strong> <?php echo htmlspecialchars($p['cat_name']); ?></p>
-          <p><strong>Price:</strong> ₵ <?php echo number_format($p['unit_price'],2); ?> / <?php echo htmlspecialchars($p['quantity']); ?></p>
-          <p><?php echo nl2br(htmlspecialchars($p['description'])); ?></p>
-          <div>
-            <label>Qty</label>
-            <input id="qty" type="number" value="1" min="1" style="width:80px;padding:8px;border-radius:8px;">
-            <button class="btn btn-primary" id="addToCart">Add to Cart</button>
-          </div>
-          <div id="msg" class="form-message"></div>
-        </div>
-      </div>
+<body class="page">
+
+<?php include "nav.php"; ?>
+
+<main class="center-wrap" style="padding:36px 20px;">
+  
+  <a class="btn btn-secondary" href="marketplace.php">← Back</a>
+
+  <div class="product-container" style="margin-top:25px;">
+    <div>
+      <img src="<?php echo htmlspecialchars($product['main_image']); ?>" class="p-img">
     </div>
-  </main>
-  <script>
-    document.getElementById('addToCart').addEventListener('click',()=>{
-      const qty = parseInt(document.getElementById('qty').value);
-      const item = { 
-        product_id: <?php echo $p['product_id']; ?>, 
-        vendor_id: <?php echo $p['vendor_id']; ?>, 
-        title: "<?php echo addslashes($p['title']); ?>", 
-        price: <?php echo (float)$p['unit_price']; ?>, 
-        qty: qty 
-      };
-      const cart = JSON.parse(localStorage.getItem('agro_cart')||'[]');
-      cart.push(item);
-      localStorage.setItem('agro_cart', JSON.stringify(cart));
-      document.getElementById('msg').textContent = 'Added to cart';
-    });
-  </script>
+
+    <div style="max-width:500px;">
+      <h1><?php echo htmlspecialchars($product['product_name']); ?></h1>
+      <h3 style="margin-top:8px;">GHS <?php echo number_format($product['price'],2); ?></h3>
+      <p style="margin-top:12px;"><?php echo nl2br(htmlspecialchars($product['product_description'])); ?></p>
+
+      <p class="muted">Stock: <?php echo $product['quantity']; ?></p>
+
+      <p class="muted">Vendor: 
+        <strong><?php echo htmlspecialchars($vendor['business_name'] ?? "Unknown Vendor"); ?></strong>
+      </p>
+
+      <div style="margin:18px 0;">
+        <label>Quantity:</label>
+        <input type="number" id="qty" class="qty-box" value="1" min="1" max="<?php echo $product['quantity']; ?>">
+      </div>
+
+      <button class="btn btn-primary" id="addToCartBtn">Add to Cart</button>
+
+      <p id="msg" style="margin-top:12px;"></p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+document.getElementById("addToCartBtn").onclick = async () => {
+  let qty = document.getElementById("qty").value;
+  let fd = new FormData();
+  fd.append("product_id", "<?php echo $product['product_id']; ?>");
+  fd.append("quantity", qty);
+
+  const res = await fetch("actions/add_to_cart_action.php", {
+    method: "POST",
+    body: fd
+  });
+
+  const data = await res.json();
+  const msg = document.getElementById("msg");
+
+  if (data.status === "success") {
+    msg.style.color = "green";
+    msg.textContent = "Added to cart!";
+  } else {
+    msg.style.color = "red";
+    msg.textContent = data.message;
+  }
+};
+</script>
+
 </body>
 </html>

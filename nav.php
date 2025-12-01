@@ -24,10 +24,10 @@ if (strpos($current_dir, '/view') !== false || strpos($current_dir, '/login') !=
         <a class="btn btn-link" href="<?php echo $base_path; ?>vendor/dashboard.php">Vendor</a>
       <?php endif; ?>
       <span class="greet">Hi, <?php echo htmlspecialchars($u['name']); ?></span>
-      <a class="btn btn-danger" href="<?php echo $base_path; ?>login/logout.php">Logout</a>
+      <a class="btn btn-danger" href="<?php echo $base_path; ?>logout.php">Logout</a>
     <?php else: ?>
-      <a class="btn btn-secondary" href="<?php echo $base_path; ?>login/register.php">Register</a>
-      <a class="btn btn-primary" href="<?php echo $base_path; ?>login/login.php">Login</a>
+      <a class="btn btn-secondary" href="<?php echo $base_path; ?>register.php">Register</a>
+      <a class="btn btn-primary" href="<?php echo $base_path; ?>login.php">Login</a>
     <?php endif; ?>
   </div>
 </div>

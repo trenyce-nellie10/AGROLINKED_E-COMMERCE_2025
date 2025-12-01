@@ -72,6 +72,8 @@ $approved = $profile['approved'] ?? 0;
                   <form method="post" action="actions/delete_product_action.php" style="display:inline;">
                     <input type="hidden" name="product_id" value="<?php echo $p['product_id']; ?>">
                     <button class="btn btn-danger" type="submit" onclick="return confirm('Delete product?')">Delete</button>
+                    <script src="js/vendor.js"></script>
+
                   </form>
                 </div>
               </div>
